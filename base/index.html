@@ -30,6 +30,16 @@
     </div>
 
     <script type="text/javascript">
+      const colorBox = document.getElementById('color');
+      const colors = ['r','g','b'];
+
+      const labels = colors.map((color) => {
+        return document.getElementById(`value-${color}`);
+      });
+
+      const sliders = colors.map((color) => {
+        return document.getElementById(`slider-${color}`);
+      });
     </script>
 
   </body>
