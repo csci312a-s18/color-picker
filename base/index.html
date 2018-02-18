@@ -40,6 +40,14 @@
       const sliders = colors.map((color) => {
         return document.getElementById(`slider-${color}`);
       });
+
+      const update = function updateCallback() {
+        console.log("Update color");
+      };
+
+      // Set oninput callback for each slider
+      sliders.forEach((slider) => slider.oninput = update);
+      update();
     </script>
 
   </body>
