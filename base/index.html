@@ -30,26 +30,6 @@
     </div>
 
     <script type="text/javascript">
-      const colorBox = document.getElementById('color');
-      const colors = ['r','g','b'];
-
-      const labels = colors.map((color) => {
-        return document.getElementById(`value-${color}`);
-      });
-
-      const sliders = colors.map((color) => {
-        return document.getElementById(`slider-${color}`);
-      });
-
-      const update = function updateCallback() {
-        colorBox.style.background =
-          `rgb(${sliders[0].value}, ${sliders[1].value}, ${sliders[2].value})`;
-        sliders.forEach((slider, index) => labels[index].innerHTML = slider.value);
-      };
-
-      // Set oninput callback for each slider
-      sliders.forEach((slider) => slider.oninput = update);
-      update();
     </script>
 
   </body>
