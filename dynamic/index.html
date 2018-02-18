@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Color Picker</title>
+    <style>
+      .color-label {
+        display: inline-block;
+        width: 50px;
+        text-align: left;
+      }
+
+      .color-box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="color-box" id="color"></div>
+    <div id="sliders"></div>
+
+    <script type="text/javascript">
+      const capitalize = function(string) {
+        return string[0].toUpperCase() + string.slice(1).toLowerCase();
+      };
+
+      const createSlider = function (label, initial_value, callback) {
+        const block = document.createElement('div');
+
+        const labelElem = document.createElement('div');
+        labelElem.innerHTML = `${label}:`
+        labelElem.className = "color-label";
+        block.appendChild(labelElem);
+
+        const rangeElem = document.createElement('input');
+        rangeElem.type="range";
+        rangeElem.min = 0;
+        rangeElem.max = 255;
+        rangeElem.value = initial_value;
+        block.appendChild(rangeElem);
+
+        const valueElem = document.createElement('span');
+        valueElem.innerHTML = initial_value;
+        block.appendChild(valueElem);
+
+        rangeElem.oninput = () => {
+            valueElem.innerHTML = rangeElem.value;
+            callback(rangeElem.value);
+        }
+
+        return block;
+      };
+
+      // Initial color state and update callback
+      const colors = { red: 0, green: 0, blue: 0 };
+
+      const colorBox = document.getElementById('color');
+
+      const update = function updateCallback(new_color) {
+        Object.assign(colors, new_color);
+        colorBox.style.background =
+          `rgb(${colors.red}, ${colors.green}, ${colors.blue})`;
+      }
+
+      // Populate placeholder element with sliders
+      const sliders = document.getElementById('sliders');
+      ['red', 'green', 'blue'].forEach((key) => {
+          // Use ES6 computed property names
+          sliders.appendChild(createSlider(
+            capitalize(key), colors[key], (value) => update({ [key]: value })
+          ));
+      });
+      update({});
+    </script>
+
+  </body>
+</html>
